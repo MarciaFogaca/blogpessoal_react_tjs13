@@ -1,4 +1,3 @@
-
 import { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
@@ -39,7 +38,6 @@ function Perfil() {
 					<p>Nome: {usuario.nome} </p>
 					<p>Email: {usuario.usuario}</p>
 
-					{/* Botão de editar */}
 					<Link
 						to={`/atualizarusuario`}
 						className="mt-8 w-full md:w-auto"

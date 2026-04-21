@@ -41,7 +41,6 @@ function Cadastro() {
 	function handleConfirmarSenha(e: ChangeEvent<HTMLInputElement>) {
 		setConfirmarSenha(e.target.value)
 	}
-
 	async function cadastrarNovoUsuario(e: SyntheticEvent<HTMLFormElement>) {
 		e.preventDefault()
 

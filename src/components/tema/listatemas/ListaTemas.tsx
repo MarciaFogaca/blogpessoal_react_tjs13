@@ -2,41 +2,38 @@ import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SyncLoader } from 'react-spinners'
 import { AuthContext } from '../../../contexts/AuthContext'
-import type Postagem from '../../../models/Postagem'
+import type Tema from '../../../models/Tema'
 import { buscar } from '../../../services/Service'
-import CardPostagem from '../cardpostagem/CardPostagem'
+import CardTema from '../cardtema/CardTema'
 import { ToastAlerta } from '../../../utils/ToastAlerta'
 
-function ListaPostagens() {
+function ListaTemas() {
 	const navigate = useNavigate()
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const [postagens, setPostagens] = useState<Postagem[]>([])
+	const [temas, setTemas] = useState<Tema[]>([])
 
-	const { usuario, handleLogout, isLogout } = useContext(AuthContext)
+	const { usuario, handleLogout } = useContext(AuthContext)
+
 	const token = usuario.token
 
 	useEffect(() => {
 		if (token === '') {
-			
-			if(!isLogout){
-				ToastAlerta('Você precisa estar logado!', "info")
-			}
-			
+			ToastAlerta('Você precisa estar logado!', "info")
 			navigate('/')
 		}
 	}, [token])
 
 	useEffect(() => {
-		buscarPostagens()
-	}, [postagens.length])
+		buscarTemas()
+	}, [temas.length])
 
-	async function buscarPostagens() {
+	async function buscarTemas() {
 		try {
 			setIsLoading(true)
 
-			await buscar('/postagens', setPostagens, {
+			await buscar('/temas', setTemas, {
 				headers: { Authorization: token },
 			})
 		} catch (error: any) {
@@ -58,10 +55,9 @@ function ListaPostagens() {
 
 			<div className="flex justify-center w-full px-4 my-4">
 				<div className="container flex flex-col">
-					{!isLoading && postagens.length === 0 && (
+					{!isLoading && temas.length === 0 && (
 						<span className="text-3xl text-center my-8">
-							Nenhuma Postagem foi
-							encontrada!
+							Nenhum Tema foi encontrado!
 						</span>
 					)}
 
@@ -69,10 +65,10 @@ function ListaPostagens() {
 						className="grid grid-cols-1 md:grid-cols-2 
                                     lg:grid-cols-3 gap-8"
 					>
-						{postagens.map((postagem) => (
-							<CardPostagem
-								key={postagem.id}
-								postagem={postagem}
+						{temas.map((tema) => (
+							<CardTema
+								key={tema.id}
+								tema={tema}
 							/>
 						))}
 					</div>
@@ -81,4 +77,4 @@ function ListaPostagens() {
 		</>
 	)
 }
-export default ListaPostagens
+export default ListaTemas

@@ -1,4 +1,3 @@
-
 import {
     useContext,
     useEffect,
@@ -19,10 +18,8 @@ function FormPostagem() {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	// Armazena todos os Temas
 	const [temas, setTemas] = useState<Tema[]>([])
 
-	// Recebe o tema associado a Postagem
 	const [tema, setTema] = useState<Tema>({ id: 0, descricao: '' })
 
 	const [postagem, setPostagem] = useState<Postagem>({} as Postagem)
@@ -56,7 +53,6 @@ function FormPostagem() {
 		}
 	}
 
-	// Busca todos os Temas que serão inseridos no Select
 	async function buscarTemas() {
 		try {
 			await buscar('/temas', setTemas, {
@@ -76,8 +72,6 @@ function FormPostagem() {
 		}
 	}, [token])
 
-	// Atualização da Postagem
-	// Busca a Postagem pelo ID e Recarrega os Temas no Select
 	useEffect(() => {
 		buscarTemas()
 
@@ -86,7 +80,6 @@ function FormPostagem() {
 		}
 	}, [id])
 
-	// Atualiza o Tema da Postagem
 	useEffect(() => {
 		setPostagem({
 			...postagem,
@@ -94,7 +87,6 @@ function FormPostagem() {
 		})
 	}, [tema])
 
-	// Adiciona o Tema selecionado no Select e o Usuário autenticado (context)
 	function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
 		setPostagem({
 			...postagem,

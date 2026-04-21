@@ -1,9 +1,7 @@
-interface HomeProps {
-    titulo: string;
-    texto: string;
-}
+import ListaPostagens from "../../components/postagem/listapostagem/ListaPostagem"
+import ModalPostagem from "../../components/postagem/modalpostagem/ModalPostagem"
 
-function Home({ titulo, texto }: HomeProps) { 
+function Home() {
     return (
         <>
             <div className="bg-indigo-900 flex justify-center">
@@ -19,21 +17,21 @@ function Home({ titulo, texto }: HomeProps) {
 
                     <div className="flex flex-col gap-4 items-center justify-center py-4 text-center md:text-left order-last md:order-first">
                         <h2 className='text-3xl md:text-5xl font-bold'>
-                            {titulo} 
+                            Seja Bem Vinde!
                         </h2>
                         <p className='text-base md:text-xl'>
-                            {texto} 
+                            Aqui seus pensamentos,podem ser compartilhados com o mundo!
                         </p>
 
                         <div className="flex justify-around gap-4">
-                            <div className='rounded text-white border-white border-solid border-2 py-2 px-4 cursor-pointer'>
-                                Nova Postagem
-                            </div>
+                            <ModalPostagem />
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <ListaPostagens />
         </>
     )
 }
